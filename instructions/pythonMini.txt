@@ -1,0 +1,38 @@
+COSC 341/342  WINTER 2015
+
+Python mini project
+
+Distributed 1/8/2015      Due 1/15/2015
+
+Write Python code for at_len() to count the number of 'atomic' elements in a
+list.    
+An 'atomic' element is a number, boolean, string.
+A 'non-atomic' element is a list.
+
+Examples (note, len() is a built-in function):
+
+len( [1, 2] )  ---> 2
+at_len( [1, 2] ) ---> 2
+
+len( [ [1, 2], 3 ] ) ---> 2
+at_len( [ [1, 2], 3 ] ) ---> 3
+
+len( [1, 2, 'three', [1, 2, 3, ['a', 'b'] ], 5] )  --> 5
+at_len( [1, 2, 'three', [1, 2, 3, ['a', 'b'] ], 5] )  --> 9
+
+Use the commenting facility to provide help() for this function.
+The function should be stored in a file that you can open in the IDLE environment.
+The file can remain on your hard disk (don't publish to the Python community).
+
+
+Remarks:
+- You will probably want to use the built-in function isinstance().
+- You will probably want to use recursive code for at_len().
+- Trouble with the recursion? Take a look at Head First Python, chapter 1,
+dealing with nested lists.
+
+
+Turn in:
+- Hard copy of code.
+- Screen shot of sample run on the above lists.
+
