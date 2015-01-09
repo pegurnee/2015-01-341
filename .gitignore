@@ -4,3 +4,4 @@
 .classpath
 .settings
 *.class
+__pycache__/
