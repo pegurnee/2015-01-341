@@ -10,3 +10,4 @@ def append_to_file(filename, text_to_write):
   file_handle = open(true_filepath, 'a')
   file_handle.write(text_to_write + '\n')
   file_handle.close()
+
