@@ -41,5 +41,14 @@ def display_symbol_table(filename, symbol_table):
   :param symbol_table: the dictionary that represents
     the symbol table
   '''
+  output_length = 32
+  start_length = 4
+  buffer = 1
+  print(('-' * start_length)
+    + (' ' * buffer) 
+    + filename
+    + (' ' * buffer) 
+    + ('-' * (output_length - start_length - len(filename) - (buffer * 2)))) 
   for label in symbol_table.keys():
-    print('| %s\t\t| x%s\t|' % (label, symbol_table[label]))
+    print('| %20s | x%s |' % (label, symbol_table[label]))
+  print('-' * output_length)
