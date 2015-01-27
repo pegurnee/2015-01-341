@@ -1,10 +1,12 @@
 def create_symbol_table(filename, absolute_flag):
+  from lc3_symbol_table import SymbolTable
+  symbol_table = SymbolTable(filename)
+
   if absolute_flag != 'abs':
     import os
     currentpath = os.path.dirname(os.path.abspath(__file__)) + os.path.sep
-    filename = currentpath + filename  
-  # from symbol_table import SymbolTable
-  symbol_table = {}
+    filename = currentpath + filename
+
   current_line = 0
   with open(filename) as file:
     for line in file:
@@ -19,7 +21,7 @@ def create_symbol_table(filename, absolute_flag):
       else:
         tokens = line.split()
         if not is_lc3_instruction(tokens[0]):
-          symbol_table[tokens[0]] = current_line
+          symbol_table.add(tokens[0], current_line)
           print('>>label: %s @%s' % (tokens[0], hex(current_line)))
         else:
           print('line %s: %s' % (hex(current_line), line))
@@ -32,29 +34,3 @@ def is_lc3_instruction(token):
     if opcode == token.lower():
       return True
   return False
-
-def display_symbol_table(filename, symbol_table):
-  '''
-  Displys a symbol table given a filename and symbol table,
-  labels cannot be longer than 20 characters, and each location
-  is given in hex.
-  :param filename: the name of the file
-  :param symbol_table: the dictionary that represents
-    the symbol table
-  '''
-  label_length = 20
-  start_offset = 4
-  buffer = 1
-  length_of_hex_number = 6
-  output_length = label_length + len(' ' * 4) + len('|' * 3) + length_of_hex_number
-
-  print(('-' * start_offset)
-    + (' ' * buffer) 
-    + filename
-    + (' ' * buffer) 
-    + ('-' * (output_length - start_offset - len(filename) - (buffer * 2)))) 
-  for label in symbol_table.keys():
-    value = str(hex(symbol_table[label]))
-    value = value[:2] + value[2:].upper()
-    print(('| %-' + str(label_length) + 's | %s |') % (label, value))
-  print('-' * output_length)
