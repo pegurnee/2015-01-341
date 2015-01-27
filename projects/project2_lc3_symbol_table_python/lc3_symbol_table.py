@@ -18,8 +18,10 @@ def create_symbol_table(filename, absolute_flag):
       else:
         tokens = line.split()
         if not is_lc3_instruction(tokens[0]):
-          print('>>label below!!')
-        print('line %s: %s' % (current_line, line))
+          symbol_table[tokens[0]] = current_line
+          print('>>label: %s @%s' % (tokens[0], current_line))
+        else:
+          print('line %s: %s' % (current_line, line))
         current_line += 1
   return symbol_table
 
@@ -30,3 +32,14 @@ def is_lc3_instruction(token):
       return True
   return False
 
+def display_symbol_table(filename, symbol_table):
+  '''
+  Displys a symbol table given a filename and symbol table,
+  labels cannot be longer than 20 characters, and each location
+  is given in hex.
+  :param filename: the name of the file
+  :param symbol_table: the dictionary that represents
+    the symbol table
+  '''
+  for label in symbol_table.keys():
+    print('| %s\t\t| x%s\t|' % (label, symbol_table[label]))
