@@ -11,7 +11,7 @@ def create_symbol_table(filename, absolute_flag):
       if line[0] == '.':
         tokens = line.lower().split()
         if tokens[0] == '.orig':
-          current_line = int(tokens[1][1:])
+          current_line = int('0' + tokens[1], 16)
         print('**cmd**')
       elif line[0] == ';':
         print('**was comment**')
@@ -19,9 +19,9 @@ def create_symbol_table(filename, absolute_flag):
         tokens = line.split()
         if not is_lc3_instruction(tokens[0]):
           symbol_table[tokens[0]] = current_line
-          print('>>label: %s @%s' % (tokens[0], current_line))
+          print('>>label: %s @%s' % (tokens[0], hex(current_line)))
         else:
-          print('line %s: %s' % (current_line, line))
+          print('line %s: %s' % (hex(current_line), line))
         current_line += 1
   return symbol_table
 
@@ -41,14 +41,19 @@ def display_symbol_table(filename, symbol_table):
   :param symbol_table: the dictionary that represents
     the symbol table
   '''
-  output_length = 32
-  start_length = 4
+  label_length = 20
+  start_offset = 4
   buffer = 1
-  print(('-' * start_length)
+  length_of_hex_number = 6
+  output_length = label_length + len(' ' * 4) + len('|' * 3) + length_of_hex_number
+
+  print(('-' * start_offset)
     + (' ' * buffer) 
     + filename
     + (' ' * buffer) 
-    + ('-' * (output_length - start_length - len(filename) - (buffer * 2)))) 
+    + ('-' * (output_length - start_offset - len(filename) - (buffer * 2)))) 
   for label in symbol_table.keys():
-    print('| %20s | x%s |' % (label, symbol_table[label]))
+    value = str(hex(symbol_table[label]))
+    value = value[:2] + value[2:].upper()
+    print(('| %-' + str(label_length) + 's | %s |') % (label, value))
   print('-' * output_length)
