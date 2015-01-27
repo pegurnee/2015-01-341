@@ -16,6 +16,17 @@ def create_symbol_table(filename, absolute_flag):
       elif line[0] == ';':
         print('**was comment**')
       else:
+        tokens = line.split()
+        if not is_lc3_instruction(tokens[0]):
+          print('>>label below!!')
         print('line %s: %s' % (current_line, line))
         current_line += 1
   return symbol_table
+
+def is_lc3_instruction(token):
+  from lc3_keywords import opcodes
+  for opcode in opcodes:
+    if opcode == token.lower():
+      return True
+  return False
+
