@@ -33,4 +33,8 @@ def is_lc3_instruction(token):
   for opcode in opcodes:
     if opcode == token.lower():
       return True
+  from lc3_keywords import pseudo_ops
+  for opcode in pseudo_ops:
+    if opcode == token.lower():
+      return True
   return False

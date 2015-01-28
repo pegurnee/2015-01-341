@@ -9,7 +9,7 @@ directives = [
   '.blkw', '.stringz',
   '.end'
 ]
-pseudoops = [
+pseudo_ops = [
   'getc', 'out',
   'puts', 'in',
   'putsp', 'halt'
