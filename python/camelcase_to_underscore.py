@@ -8,6 +8,7 @@ def main():
     filepath = input('Please enter the pathname of file to format: ', '')
   
   if not os.path.isfile(filepath):
+    print('file path is not a file.')
     return
 
   var_check1 = False
