@@ -38,3 +38,28 @@ def is_lc3_instruction(token):
     if opcode == token.lower():
       return True
   return False
+
+def decode_line(line):
+  tokens = line.strip().split()
+  if tokens[0][0] == '.':
+    tokens[0].lower()
+    if tokens[0] == '.orig':
+      return 'start', int('0' + tokens[1].lower(), 16)
+    elif tokens[0] == '.end':
+      return 'end', 1
+  elif tokens[0][0] == ';':
+      return 'none', 1
+  else:
+    if not is_lc3_instruction(token[0]):
+      if tokens[1][0] == '.':
+        tokens[1] = tokens[1].lower()
+        if tokens[1] == '.fill':
+          return tokens[0], 1
+        elif tokens[1] == '.blkw':
+          return tokens[0], int(tokens[2])
+        elif tokens[1] == '.stringz':
+          return tokens[0], len(tokens[2]) + 1
+        else:
+          return tokens[0], 1
+    else:
+      return 'none', 1
