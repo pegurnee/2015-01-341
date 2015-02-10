@@ -1,36 +1,35 @@
 class SymbolTable:
   def __init__(self, filename):
-    self.table = []
+    self.table = {}
     self.filename = filename
   def add(self, label, address):
-    tuple = (label, address)
-    self.table.append(tuple)
+    self.table[label] = address
   def getPairByLabel(self, label):
     to_return = ()
-    for tuple in self.table:
-      if tuple[0] == label:
-        to_return = tuple
+    for key in self.table.keys():
+      if key == label:
+        to_return = key, self.table[key]
         break
     return to_return
   def getPairByAddress(self, address):
     to_return = ()
-    for tuple in self.table:
-      if tuple[1] == address:
-        to_return = tuple
+    for key in self.table.keys():
+      if self.table[key] == address:
+        to_return = key, self.table[key]
         break
     return to_return
   def getLabel(self, address):
     to_return = ''
-    for tuple in self.table:
-      if tuple[1] == address:
-        to_return = tuple[0]
+    for key in self.table.keys():
+      if self.table[key] == address:
+        to_return = key
         break
     return to_return
   def getAddress(self, label):
     to_return = -1
-    for tuple in self.table:
-      if tuple[0] == label:
-        to_return = tuple[1]
+    for key in self.table.keys():
+      if key == label:
+        to_return = self.table[key]
         break
     return to_return
   def display(self):
@@ -53,8 +52,8 @@ class SymbolTable:
     	+ self.filename
     	+ (' ' * buffer) 
     	+ ('-' * (output_length - start_offset - len(self.filename) - (buffer * 2)))) 
-    for tuple in self.table:
-      value = str(hex(tuple[1]))
+    for key in self.table.keys():
+      value = str(hex(self.table[key]))
       value = value[:2] + value[2:].upper()
-      print(('| %-' + str(label_length) + 's | %s |') % (tuple[0], value))
+      print(('| %-' + str(label_length) + 's | %s |') % (key, value))
     print('-' * output_length)
