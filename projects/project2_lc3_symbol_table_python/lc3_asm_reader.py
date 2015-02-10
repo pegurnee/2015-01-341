@@ -1,4 +1,4 @@
-def create_symbol_table(filename, absolute_flag):
+def create_symbol_table(filename, absolute_flag='rel'):
   from lc3_symbol_table import SymbolTable
   symbol_table = SymbolTable(filename)
 
