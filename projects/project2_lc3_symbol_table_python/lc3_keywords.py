@@ -12,5 +12,6 @@ directives = [
 pseudo_ops = [
   'getc', 'out',
   'puts', 'in',
-  'putsp', 'halt'
+  'putsp', 'halt',
+  'ret'
 ]
