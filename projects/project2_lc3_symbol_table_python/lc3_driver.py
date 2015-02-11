@@ -9,7 +9,13 @@ def main():
     filepath = input('Please enter the pathname of file to create: ')
     if not filepath:
       filepath = 'multiply.asm'
-
+      
+  if filepath == 'test':
+    files = ['multiply.asm', 'lab10.asm', 'p1.asm', 'p2.asm', 'p3.asm'];
+    for file in files:
+      table = lc3_asm_reader.get_symbol_table(file)
+      table.display();
+    return
   if not os.path.isfile(filepath):
     print('file path is not a file.')
     return
