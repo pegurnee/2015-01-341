@@ -41,7 +41,7 @@ def get_symbol_table(filename, absolute_flag='rel'):
   with open(filename) as file:
     for line in file:
       if line.strip():
-        print(line)
+        #print(line)
         label, numlines = decode_line(line)
         if label[0] != '.':
           symbol_table.add(label, current_line)
@@ -62,7 +62,7 @@ def is_lc3_instruction(token):
 def decode_line(line):
   tokens = line.strip().split(None, 1)
   if tokens[0][0] == '.':
-    tokens[0].lower()
+    tokens[0] = tokens[0].lower()
     if tokens[0] == '.orig':
       return '.orig', int('0' + tokens[1].lower(), 16)
     elif tokens[0] == '.end':
