@@ -52,7 +52,7 @@ class SymbolTable:
     	+ self.filename
     	+ (' ' * buffer) 
     	+ ('-' * (output_length - start_offset - len(self.filename) - (buffer * 2)))) 
-    for key in self.table.keys():
+    for key in sorted(self.table.keys()):
       value = str(hex(self.table[key]))
       value = value[:2] + value[2:].upper()
       print(('| %-' + str(label_length) + 's | %s |') % (key, value))
