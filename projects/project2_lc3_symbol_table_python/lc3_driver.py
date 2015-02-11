@@ -14,8 +14,8 @@ def main():
     print('file path is not a file.')
     return
 
-  table = lc3_asm_reader.create_symbol_table(filepath)
-  table.display()
+  #table = lc3_asm_reader.create_symbol_table(filepath)
+  #table.display()
 
   table = lc3_asm_reader.get_symbol_table(filepath)
   table.display()

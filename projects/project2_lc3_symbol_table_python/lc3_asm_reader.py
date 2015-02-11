@@ -40,11 +40,12 @@ def get_symbol_table(filename, absolute_flag='rel'):
   current_line = 0
   with open(filename) as file:
     for line in file:
-      #print('line %s: %s' % (hex(current_line), line))
-      label, numlines = decode_line(line)
-      if label[0] != '.':
-        symbol_table.add(label, current_line)
-      current_line += numlines
+      if line.strip():
+        print(line)
+        label, numlines = decode_line(line)
+        if label[0] != '.':
+          symbol_table.add(label, current_line)
+        current_line += numlines
   return symbol_table
 
 def is_lc3_instruction(token):
@@ -59,7 +60,7 @@ def is_lc3_instruction(token):
   return False
 
 def decode_line(line):
-  tokens = line.strip().split()
+  tokens = line.strip().split(None, 1)
   if tokens[0][0] == '.':
     tokens[0].lower()
     if tokens[0] == '.orig':
@@ -70,16 +71,17 @@ def decode_line(line):
       return '.none', 0
 
   if not is_lc3_instruction(tokens[0]):
-    #print('eh %s' % tokens[0])
-    if tokens[1][0] == '.':
-      tokens[1] = tokens[1].lower()
-      if tokens[1] == '.fill':
-        return tokens[0], 1
-      elif tokens[1] == '.blkw':
-        return tokens[0], int(tokens[2])
-      elif tokens[1] == '.stringz':
-        return tokens[0], len(tokens[2]) + 1
+    label = tokens[0]
+    tokens = tokens[1].split(None, 1)
+    if tokens[0][0] == '.':
+      tokens[0] = tokens[0].lower()
+      if tokens[0] == '.fill':
+        return label, 1
+      elif tokens[0] == '.blkw':
+        return label, int(tokens[1].split()[0])
+      elif tokens[0] == '.stringz':
+        return label, len(tokens[1][1:tokens[1].index('"', 1)]) + 1
     else:
-      return tokens[0], 1
+      return label, 1
 
   return '.none', 1
