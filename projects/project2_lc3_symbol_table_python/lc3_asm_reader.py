@@ -28,6 +28,25 @@ def create_symbol_table(filename, absolute_flag='rel'):
         current_line += 1
   return symbol_table
 
+def get_symbol_table(filename, absolute_flag='rel'):
+  from lc3_symbol_table import SymbolTable
+  symbol_table = SymbolTable(filename)
+
+  if absolute_flag != 'abs':
+    import os
+    currentpath = os.path.dirname(os.path.abspath(__file__)) + os.path.sep
+    filename = currentpath + filename
+
+  current_line = 0
+  with open(filename) as file:
+    for line in file:
+      #print('line %s: %s' % (hex(current_line), line))
+      label, numlines = decode_line(line)
+      if label[0] != '.':
+        symbol_table.add(label, current_line)
+      current_line += numlines
+  return symbol_table
+
 def is_lc3_instruction(token):
   from lc3_keywords import opcodes
   for opcode in opcodes:
@@ -44,22 +63,23 @@ def decode_line(line):
   if tokens[0][0] == '.':
     tokens[0].lower()
     if tokens[0] == '.orig':
-      return 'start', int('0' + tokens[1].lower(), 16)
+      return '.orig', int('0' + tokens[1].lower(), 16)
     elif tokens[0] == '.end':
-      return 'end', 1
+      return '.end', 1
   elif tokens[0][0] == ';':
-      return 'none', 0
-  else:
-    if not is_lc3_instruction(token[0]):
-      if tokens[1][0] == '.':
-        tokens[1] = tokens[1].lower()
-        if tokens[1] == '.fill':
-          return tokens[0], 1
-        elif tokens[1] == '.blkw':
-          return tokens[0], int(tokens[2])
-        elif tokens[1] == '.stringz':
-          return tokens[0], len(tokens[2]) + 1
-        else:
-          return tokens[0], 1
+      return '.none', 0
+
+  if not is_lc3_instruction(tokens[0]):
+    #print('eh %s' % tokens[0])
+    if tokens[1][0] == '.':
+      tokens[1] = tokens[1].lower()
+      if tokens[1] == '.fill':
+        return tokens[0], 1
+      elif tokens[1] == '.blkw':
+        return tokens[0], int(tokens[2])
+      elif tokens[1] == '.stringz':
+        return tokens[0], len(tokens[2]) + 1
     else:
-      return 'none', 1
+      return tokens[0], 1
+
+  return '.none', 1
