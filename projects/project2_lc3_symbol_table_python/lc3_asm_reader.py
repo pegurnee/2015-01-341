@@ -48,7 +48,7 @@ def decode_line(line):
     elif tokens[0] == '.end':
       return 'end', 1
   elif tokens[0][0] == ';':
-      return 'none', 1
+      return 'none', 0
   else:
     if not is_lc3_instruction(token[0]):
       if tokens[1][0] == '.':
