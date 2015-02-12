@@ -1,49 +1,91 @@
 class SymbolTable:
+  '''
+  Symbol Table made for use to store address locations
+  of labels that exist in a file of code.
+  @author: Eddie Gurnee
+  @contact: egurnee@emich.edu
+  '''
   def __init__(self, filename):
+    '''
+    Makes a lookup table that is used to store the addresses
+    and labels of a file of code, and is capable of displaying
+    them prettily.
+    :param filename: the name of the file that the symbol table
+    is being constructed from
+    '''
     self.table = {}
     self.filename = filename
   def add(self, label, address):
-    self.table[label] = address
-  def getPairByLabel(self, label):
-    to_return = ()
-    for key in self.table.keys():
-      if key == label:
-        to_return = key, self.table[key]
-        break
-    return to_return
+    '''
+    Adds a new label=>address to the symbol table if the
+    label does not already exist in the symbol table. Returns
+    0 if the label already exists.
+    :param label: the label to add to the symbol table
+    :param address: the address to add with the label
+    '''
+    if not self.getAddress(label):
+      self.table[label] = address
+    else:
+      return 0
   def getPairByAddress(self, address):
-    to_return = ()
+    '''
+    Returns the key=>value pair of label=>address that
+    exists in the symbol table if the given address exists
+    in the table. If the address does not exist in the symbol
+    table, returns 0.
+    :param address: the address whose pair to look up
+    '''
     for key in self.table.keys():
       if self.table[key] == address:
-        to_return = key, self.table[key]
-        break
-    return to_return
-  def getLabel(self, address):
-    to_return = ''
-    for key in self.table.keys():
-      if self.table[key] == address:
-        to_return = key
-        break
-    return to_return
-  def getAddress(self, label):
-    to_return = -1
+        return key, self.table[key]
+    return 0
+  def getPairByLabel(self, label):
+    '''
+    Returns the key=>value pair of label=>address that
+    exists in the symbol table if the given label exists
+    in the table. If the label does not exist in the symbol
+    table, returns 0.
+    :param label: the label whose pair to look up
+    '''
     for key in self.table.keys():
       if key == label:
-        to_return = self.table[key]
-        break
-    return to_return
+        return key, self.table[key]
+    return 0
+  def getLabel(self, address):
+    '''
+    Returns the string label of a given integer address in 
+    the symbol table, if the address does not have an 
+    associated label existing in the symbol table, returns 0.
+    :param address: the address whose label to look up
+    '''
+    for key in self.table.keys():
+      if self.table[key] == address:
+        return key
+    return 0
+  def getAddress(self, label):
+    '''
+    Returns the integer address location of a label in the 
+    symbol table, if the label does not exist in the symbol 
+    table, returns 0.
+    :param label: the label whose address to look up
+    '''
+    for key in self.table.keys():
+      if key == label:
+        return self.table[key]
+    return 0
   def display(self, outfile=''):
     '''
-    Displys a symbol table given a filename and symbol table,
-    labels cannot be longer than 20 characters, and each location
-    is given in hex.
-    :param outfile: the name of the file where the display to be 
-    saved, defaults to be printed to console
+    Displays the symbol table in pretty formatting, to a file
+    or the console. Labels cannot be longer than 20 characters,
+    and each location is given in hex.
+    :param outfile: a flag if set to 'f' will create the file 
+    <<filename>>.sym and display the symbol table inside
     '''
     label_length = 20
     start_offset = 4
     buffer_around_filename = 1
     length_of_hex_number = 6
+    length_of_file_extension = -4
     number_of_dividers = 3
     number_of_buffers_around_labels = 4
     number_of_buffers_around_filename = 2
@@ -62,7 +104,7 @@ class SymbolTable:
     
     if outfile == 'f':
       import os
-      outfile = os.path.dirname(os.path.abspath(__file__)) + os.path.sep + self.filename[:-4] + '.sym'
+      outfile = os.path.dirname(os.path.abspath(__file__)) + os.path.sep + self.filename[:length_of_file_extension] + '.sym'
       file_handle = open(outfile, 'w')
       file_handle.write(display_string + '\n')
       file_handle.close()
