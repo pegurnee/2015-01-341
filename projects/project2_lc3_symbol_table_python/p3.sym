@@ -1,0 +1,7 @@
+//Symbol Name		Page Address
+//----------------	------------
+//	ASCII                   1012
+//	GETCHAR                 100B
+//	OUTPUT                  100E
+//	PTR                     1013
+//	TEST                    1004
