@@ -28,40 +28,37 @@ def is_lc3_instruction(token):
     if opcode == token.lower():
       return True
   return False
+
 def directive_analysis(line_segment, label='.none'):
   #print(line_segment)
-  directive = line_segment.lower().strip().split(None, 1)
-  if directive[0] == '.orig':
-    return '.orig', int('0' + directive[1].lower(), 16)
-  elif directive[0] == '.end':
+  if line_segment[:4].lower() == '.end':
     return '.end', 1
+  
+  directive, rest_of_line = line_segment.split(None, 1)
+  directive = directive.lower()
+  if directive == '.orig':
+    return '.orig', int('0' + rest_of_line, 16)
   elif directive == '.fill':
     return label, 1
   elif directive == '.blkw':
-    return label, int(tokens[1].split()[0])
+    return label, int(rest_of_line.split()[0])
   elif directive == '.stringz':
-    return label, len(tokens[1][1:tokens[1].index('"', 1)]) + 1
+    return label, len(rest_of_line[1:rest_of_line.index('"', 1)]) + 1
   
 def decode_line(line):
   line = line.strip();
-  tokens = line.strip().split(None, 1)
   if line[0] == ';':
     return '.none', 0
   if line[0] == '.':
     return directive_analysis(line)
+  
+  tokens = line.split(None, 1)
   if is_lc3_instruction(tokens[0]):
     return '.none', 1
 
   label = tokens[0]
-  tokens = tokens[1].split(None, 1)
-  if tokens[0][0] == '.':
-    tokens[0] = tokens[0].lower()
-    if tokens[0] == '.fill':
-      return label, 1
-    elif tokens[0] == '.blkw':
-      return label, int(tokens[1].split()[0])
-    elif tokens[0] == '.stringz':
-      return label, len(tokens[1][1:tokens[1].index('"', 1)]) + 1
+  if tokens[1][0] == '.':
+    return directive_analysis(tokens[1], label)
   else:
     return label, 1
 
