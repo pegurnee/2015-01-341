@@ -21,7 +21,7 @@ def main():
     return
 
   table = lc3_asm_reader.get_symbol_table(filepath)
-  table.display()
+  table.display('f')
 
 if __name__ == '__main__':
   main()
