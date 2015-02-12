@@ -2,7 +2,7 @@ opcodes = [
   'add', 'and', 'not', 'ld', 'ldi', 'ldr',
   'st', 'sti', 'str', 'lea', 'br', 'brn',
   'brz', 'brp', 'brnz', 'brnp', 'brzp', 'brnzp',
-  'jsr', 'jsrr', 'jmp', 'rti', 'trap'
+  'jsr', 'jsrr', 'jmp', 'rti', 'trap', 'ret'
 ]
 directives = [
   '.orig', '.fill',
@@ -12,6 +12,5 @@ directives = [
 pseudo_ops = [
   'getc', 'out',
   'puts', 'in',
-  'putsp', 'halt',
-  'ret'
+  'putsp', 'halt'
 ]
