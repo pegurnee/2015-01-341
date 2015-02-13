@@ -1,3 +1,4 @@
+from IN import __STRING
 class SymbolTable:
   '''
   Symbol Table made for use to store address locations
@@ -15,6 +16,32 @@ class SymbolTable:
     '''
     self.table = {}
     self.filename = filename
+  def __str__(self):
+    '''
+    The very pretty display of the symbol table.
+    '''
+    label_length = 20
+    start_offset = 4
+    buffer_around_filename = 1
+    length_of_hex_number = 6
+    length_of_file_extension = -4
+    number_of_dividers = 3
+    number_of_buffers_around_labels = 4
+    number_of_buffers_around_filename = 2
+    output_length = label_length + len(' ' * number_of_buffers_around_labels) + len('|' * number_of_dividers) + length_of_hex_number
+
+    display_string = (('-' * start_offset)
+      + (' ' * buffer_around_filename) 
+      + self.filename
+      + (' ' * buffer_around_filename) 
+      + ('-' * (output_length - start_offset - len(self.filename) - (buffer_around_filename * number_of_buffers_around_filename)))) 
+    for key in sorted(self.table.keys()):
+      value = str(hex(self.table[key]))
+      value = value[:2] + value[2:].upper()
+      display_string += ('\n| %-' + str(label_length) + 's | %s |') % (key, value)
+    display_string += '\n' + ('-' * output_length)
+    
+    return display_string
   def add(self, label, address):
     '''
     Adds a new label=>address to the symbol table if the
@@ -81,26 +108,7 @@ class SymbolTable:
     :param outfile: a flag if set to 'f' will create the file 
     <<filename>>.sym and display the symbol table inside
     '''
-    label_length = 20
-    start_offset = 4
-    buffer_around_filename = 1
-    length_of_hex_number = 6
-    length_of_file_extension = -4
-    number_of_dividers = 3
-    number_of_buffers_around_labels = 4
-    number_of_buffers_around_filename = 2
-    output_length = label_length + len(' ' * number_of_buffers_around_labels) + len('|' * number_of_dividers) + length_of_hex_number
-
-    display_string = (('-' * start_offset)
-    	+ (' ' * buffer_around_filename) 
-    	+ self.filename
-    	+ (' ' * buffer_around_filename) 
-    	+ ('-' * (output_length - start_offset - len(self.filename) - (buffer_around_filename * number_of_buffers_around_filename)))) 
-    for key in sorted(self.table.keys()):
-      value = str(hex(self.table[key]))
-      value = value[:2] + value[2:].upper()
-      display_string += ('\n| %-' + str(label_length) + 's | %s |') % (key, value)
-    display_string += '\n' + ('-' * output_length)
+    display_string = self.__str__()
     
     if outfile == 'f':
       import os
