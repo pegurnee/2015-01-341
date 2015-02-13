@@ -1,4 +1,3 @@
-from IN import __STRING
 class SymbolTable:
   '''
   Symbol Table made for use to store address locations
