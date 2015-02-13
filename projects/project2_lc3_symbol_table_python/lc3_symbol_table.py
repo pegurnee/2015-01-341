@@ -23,7 +23,6 @@ class SymbolTable:
     start_offset = 4
     buffer_around_filename = 1
     length_of_hex_number = 6
-    length_of_file_extension = -4
     number_of_dividers = 3
     number_of_buffers_around_labels = 4
     number_of_buffers_around_filename = 2
@@ -106,6 +105,7 @@ class SymbolTable:
     :param outfile: a flag if set to 'f' will create the file 
     <<filename>>.sym and display the symbol table inside
     '''
+    length_of_file_extension = -4
     display_string = self.__str__()
     
     if outfile == 'f':
