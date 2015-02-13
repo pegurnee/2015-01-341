@@ -21,7 +21,8 @@ def get_symbol_table(filename, absolute_flag='r'):
         #print(line)
         label, numlines = decode_line(line)
         if label[0] != '.':
-          symbol_table.add(label, current_line)
+          if not symbol_table.add(label, current_line):
+            print("Error adding label: '%s', already exists in table" % label)
         current_line += numlines
   return symbol_table
 
