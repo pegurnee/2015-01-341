@@ -3,6 +3,9 @@ import sys
 import lc3_asm_reader
 
 def main():
+  '''
+  Creates and displays symbol tables based on input
+  '''
   if len(sys.argv) == 2:
     filepath = sys.argv[1]
   else:
