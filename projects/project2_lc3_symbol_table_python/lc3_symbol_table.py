@@ -44,13 +44,14 @@ class SymbolTable:
     '''
     Adds a new label=>address to the symbol table if the
     label does not already exist in the symbol table. Returns
-    0 if the label already exists.
+    0 if the label already exists, true on success.
     :param label: the label to add to the symbol table
     :param address: the address to add with the label
     '''
     if label in self.table.keys():
       return 0
     self.table[label] = address
+    return True
   def getPairByAddress(self, address):
     '''
     Returns the key=>value pair of label=>address that
