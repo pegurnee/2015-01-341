@@ -49,10 +49,9 @@ class SymbolTable:
     :param label: the label to add to the symbol table
     :param address: the address to add with the label
     '''
-    if not self.getAddress(label):
-      self.table[label] = address
-    else:
+    if label in self.table.keys():
       return 0
+    self.table[label] = address
   def getPairByAddress(self, address):
     '''
     Returns the key=>value pair of label=>address that
