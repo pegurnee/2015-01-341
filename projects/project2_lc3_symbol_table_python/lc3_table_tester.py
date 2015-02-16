@@ -32,5 +32,10 @@ def main():
         print(line.strip())
   print(expected)
   
+  if actual == expected:
+    print('great success')
+  else:
+    print('fail')
+  
 if __name__ == '__main__':
   main()
