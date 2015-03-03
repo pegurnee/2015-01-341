@@ -1,0 +1,85 @@
+COSC 341/342 WINTER 2015
+
+Haskell mini project
+
+Distributed 3/3/2015   Due 3/12/2015
+
+(1) For the following built-in Haskell functions (and operators), complete this table
+(for preference, use chapter 1 of the Haskell book, however any source of information
+is acceptable).
+I have filled in the first and third rows,
+
+function    prefix/    # parameters     parameter types          example                 description
+             infix
+----------------------------------------------------------------------------------------------------------
+&&           infix        2             Boolean, Boolean         x>5 && True               logical AND
+
+not
+
+succ        prefix        1               enumerable types       succ 'a'               succeeding element
+                                         e.g., char, int
+`div`
+
+++
+:
+!!
+
+..
+
+<=
+
+<-
+
+|
+
+head
+tail
+init
+last
+length
+reverse
+take
+drop
+
+elem
+`elem`
+
+sum
+
+fst
+snd
+zip
+
+
+(2) Using list comprehension and filtering as much as possible, write and
+demonstrate functions that do the following. You can (and, whenever reasonable 
+you should) use more than one function for each solution.  
+
+You can use your own choice of names for functions, however each solution must
+be clearly commented, e.g.,    --  Solution 2.e  --
+
+2.a. Obtain the list of numbers that are the squares of integers in a list of 
+numbers.
+
+2.b. Obtain the list of numbers that are the square root of the integers in a 
+list of integers; the resulting list contains only the integer valued square 
+roots. For the list [ 0 .. 16 ], the correct result is [0, 1, 2, 3, 4]
+
+2.c. Obtain the string by removing all vowels ['a', 'e', 'i', 'o', 'u') from a 
+given string.
+
+2.d. For a 6-sided die, obtain all the ways you can get a 7 from the sum of 
+two dice.
+The correct answer is [ [1,6], [6,1], [2,5], [5,2], [3,4], [4,3] ]
+
+2.e. Give a list of unique names (Example: 
+["fluffy", "killer", "pooky", "skippy", "spot", "baron"] ), 
+a list of unique transitive verbs (example: ["loves", "kicks", "bites", "feeds"] ),
+return a list (length 3) of triples (3-tuples) of form (name, verb, name), where
+the first name is different from the last name. E.g., for the lists above, 
+a correct answer is: 
+[ ("fluffy", "loves", "killer"), ("pooky", "feeds", "fluffy"), 
+  ("baron", "feeds", "spot") ]
+
+ 
+
