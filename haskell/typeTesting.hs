@@ -13,7 +13,7 @@ first (x, _, _) = x
 second (_, y, _) = y
 third (_, _, z) = z
 letRightTriangles x = 
-	[(a,b,c) | a <- [1..x], 
-				b <- [1..x], 
-				c <- [1..x], 
-				a^2 + b^2 == c^2]
+        [(a,b,c) | a <- [1..x], 
+                                b <- [1..x], 
+                                c <- [1..x], 
+                                a^2 + b^2 == c^2]
