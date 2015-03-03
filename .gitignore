@@ -130,6 +130,9 @@ cabal.config
 *.aux
 *.hp
 
+# EclipseFP
+/.dist-buildwrapper/
+
 # Erlang gitignore
 .eunit
 deps
