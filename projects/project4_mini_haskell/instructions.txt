@@ -1,0 +1,45 @@
+COSC 341/342  WINTER 2015
+
+Haskell mini project 2
+
+Distributed 3/12/2015    Due 3/19/2015 (one week)
+
+All code should be place in a single file.
+
+Write and demonstrate the following functions using list comprehension and 
+pattern matching when possible.
+
+You should not use a Haskell function that immediately solves the problem.
+  
+All functions should be given type declarations.  You should use the names
+I have supplied in the following problems.
+
+(1) Given a list, return the tail of the list (note: do not use Haskell's tail)
+    tail'
+
+(2) Given a list of numbers, return sum of the elements in the list 
+    (do not use Haskell's sum)
+    sum'
+
+(3) Given two tuples (x1 y1) and (x2, y2), that are each (Number, Number), 
+    return the distance
+    between the two points:  distance = sqrt ( (x1 - x2) ^ 2 + (y1 - y2) ^2 )
+    You can use Haskell's sqrt
+    distance
+    
+(4) Given two lists of numbers, return a list that is the sum of corresponding
+    elements.
+    sum''
+    
+(5) Given a list (of any type) return the same list in reverse 
+    (do not use Haskell's reverse)
+    reverse'
+    
+(6) Given a list of 2-tuples, the first element of each tuple is a String,
+    the second element of each tuple is a Bool.
+    The function pack will return the list of tuples that contains only the tuples in the first list 
+    that have the Bool value set to True. That is, the Bool value of each 
+    tuple can be thought of as a 'delete' bit.
+    
+    Example: pack  [ ("a", True), ("b", False), ("c", False), ("d", True) ]
+           returns [ ("b", False), ("c", False) ]
