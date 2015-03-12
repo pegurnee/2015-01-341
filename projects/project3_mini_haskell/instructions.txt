@@ -65,7 +65,7 @@ numbers.
 list of integers; the resulting list contains only the integer valued square 
 roots. For the list [ 0 .. 16 ], the correct result is [0, 1, 2, 3, 4]
 
-2.c. Obtain the string by removing all vowels ['a', 'e', 'i', 'o', 'u') from a 
+2.c. Obtain the string by removing all vowels ['a', 'e', 'i', 'o', 'u'] from a 
 given string.
 
 2.d. For a 6-sided die, obtain all the ways you can get a 7 from the sum of 
