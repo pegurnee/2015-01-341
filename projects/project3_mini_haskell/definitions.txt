@@ -1,0 +1,40 @@
+function    prefix/    # parameters     parameter types          example                 description
+             infix
+----------------------------------------------------------------------------------------------------------
+&&           infix        2             Boolean, Boolean         x>5 && True               logical AND
+
+not
+
+succ        prefix        1               enumerable types       succ 'a'               succeeding element
+                                         e.g., char, int
+`div`
+
+++
+:
+!!
+
+..
+
+<=
+
+<-
+
+|
+
+head
+tail
+init
+last
+length
+reverse
+take
+drop
+
+elem
+`elem`
+
+sum
+
+fst
+snd
+zip
