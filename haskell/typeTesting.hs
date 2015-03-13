@@ -12,8 +12,8 @@ addVectors (x1, y1) (x2, y2) = (x1 + x2, y1 + y2)
 first (x, _, _) = x
 second (_, y, _) = y
 third (_, _, z) = z
-letRightTriangles x = 
-        [(a,b,c) | a <- [1..x], 
-                                b <- [1..x], 
-                                c <- [1..x], 
+letRightTriangles x =
+        [(a,b,c) | a <- [1..x],
+                                b <- [1..x],
+                                c <- [1..x],
                                 a^2 + b^2 == c^2]

@@ -3,7 +3,7 @@ maximumRec [] = error "empty list"
 maximumRec [x] = x
 maximumRec (x:xs) = max x (maximumRec xs)
 replicateRec :: (Num i, Ord i) => i -> a -> [a]
-replicateRec n x 
+replicateRec n x
     | n <= 0 = []
     | otherwise = x:replicateRec (n - 1) x
 takeRec :: (Num i, Ord i) => i -> [a] -> [a]
@@ -23,7 +23,7 @@ zipRec (x:xs) (y:ys) = (x,y):zipRec xs ys
 elemRec :: (Eq a) => a -> [a] -> Bool
 elemRec a [] = False
 elemRec a (x:xs)
-    | a == x = True 
+    | a == x = True
     | otherwise = elemRec a xs
 quicksort :: (Ord a) => [a] -> [a]
 quicksort [] = []
