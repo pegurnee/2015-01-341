@@ -10,13 +10,14 @@ module Haskell_Mini_Project
 import Assist_Lib
 
 -- 1 --
-tail' = []
+tail' (l:theList) = theList
 
 -- 2 --
-sum' = []
+sum' [] = 0
+sum' (l:theList) = l + sum' theList
 
 -- 3 --
-distance = []
+distance (x1, y1) (x2, y2) = sqrt (fromIntegral((x1 - x2)^2 + (y1 - y2)^2))
 
 -- 4 --
 sum'' _ [] = []
