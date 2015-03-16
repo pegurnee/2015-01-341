@@ -8,8 +8,8 @@ module Assist_Lib
 
 sampleData = ['a'..'r']
 sampleMap = [True, False, False]
-store theData deleteMap = [(dataItem, deleteKey)
-      | x <- [1..15],
-        dataItem <- theData !! (x `mod` (length theData)),
-        deleteKey <- deleteMap !! (x `mod` (length deleteMap))]
+store [] _ = []
+store (d:theData) [True] = (d, False) : store theData [False]
+store (d:theData) [False] = (d, True) : store theData [True]
+store (d:theData) all@(m:deleteMap) = (d, m) : store theData deleteMap
 points = [(4, 3), (1, 6), (2, 4)]

@@ -22,8 +22,7 @@ sum' (l:theList) = l + sum' theList
 
 -- 3 --
 distance :: (Integral a, Floating b) => (a, a) -> (a, a) -> b
-distance (x1, y1) (x2, y2) = sqrt
-      $ fromIntegral $ sum
+distance (x1, y1) (x2, y2) = sqrt . fromIntegral . sum
       $ map (^2) [(x1 - x2), (y1 - y2)]
 
 -- 4 --
