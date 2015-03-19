@@ -1,15 +1,29 @@
 module Assist_Lib
 ( store
-, sampleData
-, sampleMap
+, head'
+, init'
+, last'
 , points
-
 ) where
 
-sampleData = ['a'..'r']
-sampleMap = [True, False, False]
-store [] _ = []
-store (d:theData) [True] = (d, False) : store theData [False]
-store (d:theData) [False] = (d, True) : store theData [True]
-store (d:theData) all@(m:deleteMap) = (d, m) : store theData deleteMap
+import           System.Random
+
+head' :: [a] -> a
+head' (theHead:_) = theHead
+
+init' :: [a] -> [a]
+init' [] = []
+init' [x] = []
+init' (x:y:xs) = x : init' (y:xs)
+
+last' :: [a] -> a
+last' [x] = x
+last' (_:x:xs) = last' (x:xs)
+
+deleteMap = randoms (mkStdGen 1) :: [Bool]
+
+store :: [a] -> [(a, Bool)]
+store [] = []
+store theData = zip theData deleteMap
+
 points = [(4, 3), (1, 6), (2, 4)]
