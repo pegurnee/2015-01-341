@@ -11,7 +11,7 @@ Implement the following in Haskell
    - a list of numbers
   The resulting list is formed by computed the successive function and
   accumulating as you go.  The first (0 index element) value is computed
-  as f 0 (list !! 0)
+  as f (list !! 0) (list !! 0)
   
   For example
 prefix (+) [2, 4, 1, 1]
@@ -61,7 +61,7 @@ Take a list of tuples, the first element of the tuples is an integer.
 The tuples are sorted on the first element.
 The second element of each tuple is a list of values.
 
-Return the list [ Int, [Int] ], where the first value is the number of tuples
+Return the list ( Int, [Int] ), where the first value is the number of tuples
 in the input parameter,
 the second value is the concatenated list of the values from the second
 value of the tuples.
@@ -69,10 +69,10 @@ value of the tuples.
 Example:
 
 gather [ (0, [true, true] ), (1, [true, false] ), (2, [false, true]) ]
-  returns [3, [true, true, true, false, false, true] ]
+  returns ( 3, [true, true, true, false, false, true] )
 
 gather [ (0, [1, 4, 7] ), (1, [2, 5] ), (2, [3, 6] ) ]
-  returns [ 3 [1, 2, 3, 4, 5, 6, 7]  ]
+  returns ( 3 [1, 2, 3, 4, 5, 6, 7]  )
   
 -----------------------------------------------------------------------------
 
