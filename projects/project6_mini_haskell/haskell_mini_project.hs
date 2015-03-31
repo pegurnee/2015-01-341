@@ -13,10 +13,20 @@ import           Assist_Lib
 count = 4
 
 -- 2 --
-substring = 4
+substring xs ys = subHelp 0 xs ys
+
+subHelp curIndex (x:xs) (y:ys)
+  | x == y = checkMore xs ys
+  | not (elem x ys) = -1
+  | otherwise = subHelp (curIndex + 1) (x:xs) ys
+  where
+    checkMore [] _ = curIndex
+    checkMore (ix:ixs) (iy:iys)
+      | ix == iy = checkMore ixs iys
+      | not (elem ix iys) = -1
+      | otherwise = checkMore ixs iys
 
 -- 3 --
-get_last = 4
 get_last [] = error "empty list"
 get_last [x] = x
 get_last (_:x:xs) = get_last (x:xs)
@@ -35,4 +45,6 @@ permute (x:xs) = [x | x <- xs] : premute xs
 
 -- 6 --
 ackermann = 4
+
+
 
