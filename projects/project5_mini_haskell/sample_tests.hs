@@ -1,3 +1,7 @@
+module Sample_Tests
+( testAll
+) where
+
 import           Haskell_Mini_Project
 
 testAll = testPrefix1 && testPrefix2 && testPrefix3

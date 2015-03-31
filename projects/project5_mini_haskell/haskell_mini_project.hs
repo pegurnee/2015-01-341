@@ -11,11 +11,10 @@ import           Assist_Lib
 prefix :: (a -> a -> a) -> [a] -> [a]
 prefix = scanl1'
 
-scanl' :: (b -> a -> b) -> b -> [a] -> [b]
 scanl' _ _ [] = []
 scanl' func curr (x:xs) = new : scanl' func new xs
   where new = func curr x
-scanl1' :: (a -> a -> a) -> [a] -> [a]
+
 scanl1' func (x:xs) = x : scanl' func x xs
 
 -- 2 --
@@ -33,7 +32,8 @@ scatter numberOfCores sharableData =
 combine [] _ = []
 combine (coreNum:remainingCores) [] = (coreNum, []) : combine remainingCores []
 combine (coreNum:remainingCores) all@(x:xs) =
-      grabAllData coreNum all : combine remainingCores (removeExtraData coreNum xs)
+      grabAllData coreNum all :
+            combine remainingCores (removeExtraData coreNum xs)
 
 grabAllData key theData = (key, [snd tuple | tuple <- theData, fst tuple == key])
 removeExtraData key = filter (\x -> fst x /= key)

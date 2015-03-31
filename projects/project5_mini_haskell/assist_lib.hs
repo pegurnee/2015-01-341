@@ -56,5 +56,5 @@ isVowel c = elem c ['a', 'e', 'i', 'o', 'u']
 isConsonant :: Char -> Bool
 isConsonant c = not $ isVowel c
 
-trimListOfKey :: Eq a => a -> [(a, b)] -> [(a, b)]
+trimListOfKey :: (Eq a) => a -> [(a, b)] -> [(a, b)]
 trimListOfKey key = filter (\x -> fst x /= key)
