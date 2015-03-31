@@ -31,6 +31,7 @@ init' [x] = []
 init' (x:y:xs) = x : init' (y:xs)
 
 last' :: [a] -> a
+last' [] = error "empty list"
 last' [x] = x
 last' (_:x:xs) = last' (x:xs)
 
