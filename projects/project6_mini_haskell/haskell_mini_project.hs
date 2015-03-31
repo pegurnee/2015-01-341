@@ -10,7 +10,15 @@ module Haskell_Mini_Project
 import           Assist_Lib
 
 -- 1 --
-count = 4
+count item = counter 0
+  where
+    counter curr [] = curr
+    counter curr (x:xs)
+      | item == x = counter (curr + 1) xs
+      | not (elem item xs) = curr
+      | otherwise = counter curr xs
+
+count' item = length . filter (== item)
 
 -- 2 --
 substring xs ys = subHelp 0 xs ys
