@@ -54,10 +54,22 @@ zip_pairs (x:xs) (y:ys) = mergeTuples x y : zip_pairs xs ys
 
 -- 5 --
 premute [] = []
-permute (x:xs) = [x | x <- xs] : premute xs
+permute (x:xs) =  4
 
 -- 6 --
-ackermann = 4
+ackermann m n
+  | m == 0 = n + 1
+  | m > 0 && n == 0 = ackermann (m - 1) 1
+  | m > 0 && n > 0 = ackermann (m - 1) (ackermann m (n - 1))
+  | otherwise = error "must have positive values"
+
+ackermann' m n p
+  | p == 0 = m + n
+  | n == 0 && p == 1 = 0
+  | n == 0 && p == 2 = 1
+  | n == 0 = m
+  | otherwise = ackermann' m (ackermann' m (n - 1) p) (p - 1)
+
 
 
 
