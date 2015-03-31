@@ -32,7 +32,7 @@ subHelp curIndex (x:xs) (y:ys)
     checkMore (ix:ixs) (iy:iys)
       | ix == iy = checkMore ixs iys
       | not (elem ix iys) = -1
-      | otherwise = checkMore ixs iys
+      | otherwise = subHelp (curIndex + 1) (x:xs) ys
 
 -- 3 --
 get_last [] = error "empty list"
