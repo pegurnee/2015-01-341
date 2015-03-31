@@ -20,20 +20,23 @@ reduce func num xs = foldl1 (func) $ num : xs
 --scatter num (x:xs) =
 scatter num xs = combine $ groupish num xs
 
-groupish num xs = zip' [0..num-1] xs
+groupish num = zip (cycle [0..num-1])
+
+combine [] = []
+combine all@(x:xs) = graball (fst x) all : combine (trim_list_of' (fst x) xs)
+  where
+    graball num rest = (num, [snd item | item <- rest, fst item == num])
+
+trim_list_of num xs = [elem | elem <- xs, fst elem /= num]
+trim_list_of' num = filter (\x -> fst x /= num)
+
+{--
+zip' [0..num-1] xs
   where
     zip' _ [] = []
     zip' [] ys = zip' [0..num-1] ys
-    zip' (x:xs) (y:ys) = (x,[y]) : zip' xs ys
-
-
-combine [] = []
-combine all@(x:xs) = graball (fst x) all : combine (removeallthe (fst x) xs)
-  where
-    graball num rest = (num, foldl1 (++) [snd item | item <- rest, fst item == num])
-    removeallthe num rest = [elem | elem <- rest, fst elem /= num]
-
-
+    zip' (x:xs) (y:ys) = (x,y) : zip' xs ys
+    --}
 
 
 
