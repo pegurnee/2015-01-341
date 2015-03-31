@@ -20,6 +20,11 @@ count item = counter 0
 
 count' item = length . filter (== item)
 
+count'' item [] = 0
+count'' item (x:xs)
+  | item == x = 1 + count'' item xs
+  | otherwise = count'' item xs
+
 -- 2 --
 substring xs ys = subHelp 0 xs ys
 
