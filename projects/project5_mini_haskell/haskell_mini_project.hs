@@ -18,17 +18,27 @@ reduce func num xs = foldl1 (func) $ num : xs
 -- 3 --
 --scatter :: Integral -> [a] -> [(Integral, a)]
 --scatter num (x:xs) =
-scatter num xs = combine $ groupish num xs
-
-groupish num = zip (cycle [0..num-1])
-
-combine [] = []
-combine all@(x:xs) = graball (fst x) all : combine (trim_list_of' (fst x) xs)
+scatter num xs = combine [0..num-1] $ groupish num xs
   where
-    graball num rest = (num, [snd item | item <- rest, fst item == num])
+    groupish num = zip (cycle [0..num-1])
 
-trim_list_of num xs = [elem | elem <- xs, fst elem /= num]
-trim_list_of' num = filter (\x -> fst x /= num)
+{--
+groupish num = zip' [0..num-1]
+  where
+    zip' [] [] = []
+    zip' (x:xs) [] = (x, []) : zip' xs []
+    zip' [] ys = zip (cycle [0..num-1]) ys
+    zip' (x:xs) (y:ys) = (x, y) : zip' xs ys
+    --}
+
+combine [] _ = []
+combine (p:pos) [] = (p, []) : combine pos []
+combine (p:pos) all@(x:xs) = grab_all_data p all : combine pos (trim_list_of_key p xs)
+  where
+    grab_all_data num rest = (num, [snd item | item <- rest, fst item == num])
+
+grab_all_with_key_as_tuple key list = (key, filter (\x -> fst x == key) list)
+trim_list_of_key key = filter (\x -> fst x /= key)
 
 {--
 zip' [0..num-1] xs
