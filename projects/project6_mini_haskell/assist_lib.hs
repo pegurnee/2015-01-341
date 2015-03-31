@@ -18,14 +18,15 @@ module Assist_Lib
 import           System.Random
 
 tail' :: [a] -> [a]
-tail' [] = []
+tail' [] = error "empty list"
 tail' (_:theList) = theList
 
 head' :: [a] -> a
+head' [] = error "empty list"
 head' (theHead:_) = theHead
 
 init' :: [a] -> [a]
-init' [] = []
+init' [] = error "empty list"
 init' [x] = []
 init' (x:y:xs) = x : init' (y:xs)
 
