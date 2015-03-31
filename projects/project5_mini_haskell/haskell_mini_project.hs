@@ -34,5 +34,9 @@ combine (coreNum:remainingCores) all@(x:xs) =
 
 -- 4 --
 --gather ::
-gather _ = 4
+gather allDistributedData = (numCores, recombineData allDistributedData)
+  where
+    numCores = fst (last allDistributedData) + 1
+    recombineData [] = []
+    recombineData (first:allTheRest) = snd first ++ recombineData allTheRest
 
