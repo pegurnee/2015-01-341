@@ -17,6 +17,9 @@ substring = 4
 
 -- 3 --
 get_last = 4
+get_last [] = error "empty list"
+get_last [x] = x
+get_last (_:x:xs) = get_last (x:xs)
 
 -- 4 --
 zip_pairs [] _ = []
