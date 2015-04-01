@@ -53,8 +53,12 @@ zip_pairs (x:xs) (y:ys) = mergeTuples x y : zip_pairs xs ys
 
 
 -- 5 --
-premute [] = []
-permute (x:xs) =  4
+permute [] = [[]]
+permute xs = [x:ys | x <- xs, ys <- permute (trimmedList x xs)]
+  where trimmedList target (t:trimmed) =
+                  if target == t
+                    then trimmed
+                    else t : trimmedList target trimmed
 
 -- 6 --
 ackermann m n
