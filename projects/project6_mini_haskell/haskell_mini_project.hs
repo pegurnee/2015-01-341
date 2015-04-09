@@ -74,6 +74,3 @@ ackermann' m n p
   | n == 0 = m
   | otherwise = ackermann' m (ackermann' m (n - 1) p) (p - 1)
 
-
-
-
