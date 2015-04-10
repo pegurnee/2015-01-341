@@ -21,7 +21,8 @@ zip([], _) -> [];
 zip(_, []) -> [];
 zip([Head1 | Tail1], [Head2 | Tail2]) -> [{Head1, Head2} | zip(Tail1, Tail2)].
 
-permute(X) -> false.
+permute([]) -> [[]];
+permute(List) -> [[Head | Tail] || Head <- List, Tail <- permute(List -- [Head])].
 
 ackermann(M, N) when M < 0; N < 0 -> fail_blog;
 ackermann(0, N) -> N + 1;
