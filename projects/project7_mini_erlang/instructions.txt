@@ -1,46 +1,69 @@
 Erlang Mini Project #1
-Distributed 3/31/2015     Due 4/7/2015
+Distributed 4/9/2015     Due 4/14/2015
 
-Implement the following in Haskell using recursion, map, and/or fold
+Implement the following in Erlang
 
-(1) count a -> [a] -> Int
-return the number of times a appears in the list
-count 2 [2, 3, 2, 1, 2, 5]  ----> 3
+(1) count(X, L)
+return the number of times X appears in the list L (at the top level of L)
+count (2, [2, 3, 2, 1, 2, 5])  ----> 3
+count (a, [ a, b, c, d]) ----> 1
+count (a, [ [a, a], b, {a, b, c}]) ----> 0      %% only consider top level of L
 
-(2) substring [a] -> [a] -> [a] 
+
+(2) substring ( L1, L2 )
+
 return the index (index starts at 0), where the first list
 appears in the second list
 
-substring [2, 3, 4] [0, 1, 2, 3, 4, 3, 4 ] ----> 2
-substring [1, 7] [0, 1, 2, 3, 1, 7, 6]     ----> 4
+substring ([2, 3, 4], [0, 1, 2, 3, 4, 3, 4 ]) ----> 2
+substring ([1, 7], [0, 1, 2, 3, 1, 7, 6])     ----> 4
+substring ([1], [3, 2, a, {1, 1}, 1] ---->  4
 
-(3) get_last [a] -> a
+
+(3) get_last (L) 
+
 return the final element in the list
 
-get_last [1, 2, 3, 5] ----> 5
+get_last ([1, 2, 3, 5]) ----> 5
 
-(4) zip_pairs [ (a, b) ] [ (c, d) ]  -> [ (a, b, c, d) ]
-Given two lists of pairs, return a new list of 4-ary tuples where the
-first two values of the resulting tuple are the values from the first list
-and the last two values of resulting tuple are the values from the second list
---- corresponding tuples.
 
-zip_pairs [ (1, 2), (3, 4), (5, 6) ]  [ (100, 101), (200, 201) ] ----> 
-   [ (1, 2, 100, 101), (3, 4, 200, 201) ]
 
-(5) permute [a]  -> [ [a] ]
+(4) zip ( L1, L2)
+%% This is simplified from the Haskell problem
+
+Given two lists, return a new list of 2-ary tuples where the
+first value of the resulting tuple is from the first list
+and the last value of  tuple is from the second list.
+
+zip ( [ 1, 3, a ], [ 100, b, c ] ) ----> 
+   [ {1, 100}, {3, b}, {a, c} ]
+ 
+zip ([ {"aa", 0}, {"bb", 1}, {"cc", 2} ] [ 1, [10,11] ] ) ---->
+   [ { {"aa", 0}, 1}, { {"bb", 1}, [10, 11] } ]
+   
+zip ( [ a, b ] [ c, d, 1, 2] )  -> [ {a, c}, {b, d} ]
+
+
+(5) permute ( L )
+
 Given a list of values, return a list of all permutations
 
-permute [1, 2, 3] ----> 
+permute ([1, 2, 3] ) ----> 
     [ [1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1] ]
+    
 
-(6) ackermann a -> a -> a
+(6) ackermann 
 Implement Ackermann's function.  (Everyone should implement Ackermann's at
 some point)
 
-Given commented source code, using the function names given above.
+
+
+Give commented source code, using the function names given above.
 You can define multiple function to simplify the implementation of 1 - 6
-above.  Functions must use recursion (and/or map, and/or fold).
+above.  Functions must use recursion.
 
 Show output for (1-6) that has demonstrates the correct functioning of the code.
 That will include demonstrations of base cases and recursive calls.
+  
+ 
+  
