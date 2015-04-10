@@ -13,7 +13,9 @@ count(X,Y) -> false.
 
 substring(X,Y) -> false.
 
-get_last(X) -> false.
+get_last([]) -> [];
+get_last([X]) -> X;
+get_last([X, Y | Tail]) -> get_last([Y | Tail]).
 
 zip([], _) -> [];
 zip(_, []) -> [];
