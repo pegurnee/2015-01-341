@@ -9,7 +9,12 @@
 %% ====================================================================
 -export([count/2, substring/2, get_last/1, zip/2, permute/1, ackermann/2]).
 
-count(X,Y) -> false.
+count(X, []) -> 0;
+count(X, [Y | YS]) -> 
+    case X =:= Y of
+        true -> 1 + count(X, YS);
+        false -> count(X, YS)
+    end.
 
 substring(X,Y) -> subHelp(0, X, Y).
 
