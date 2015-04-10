@@ -7,7 +7,7 @@
 %% ====================================================================
 %% API functions
 %% ====================================================================
--export([count/2, substring/2, get_last/1, zip_pairs/2, permute/1, ackermann/2]).
+-export([count/2, substring/2, get_last/1, zip/2, permute/1, ackermann/2]).
 
 count(X,Y) -> false.
 
@@ -15,7 +15,9 @@ substring(X,Y) -> false.
 
 get_last(X) -> false.
 
-zip_pairs(X,Y) -> false.
+zip([], _) -> [];
+zip(_, []) -> [];
+zip([Head1 | Tail1], [Head2 | Tail2]) -> [{Head1, Head2} | zip(Tail1, Tail2)].
 
 permute(X) -> false.
 
