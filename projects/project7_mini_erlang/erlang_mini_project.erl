@@ -11,7 +11,21 @@
 
 count(X,Y) -> false.
 
-substring(X,Y) -> false.
+substring(X,Y) -> subHelp(0, X, Y).
+
+subHelp(_, _, []) -> -1;
+subHelp(Index, X, Y) ->
+    case take(Y, length(X)) of
+        X -> Index;
+        _ -> subHelp(Index + 1, X, tail(Y))
+    end.
+
+take([], _) -> [];
+take(_, 0) -> [];
+take([Head | Tail], N) -> [Head | take(Tail, N - 1)].
+
+tail([]) -> [];
+tail([H | T]) -> T.
 
 get_last([]) -> [];
 get_last([X]) -> X;
