@@ -1,7 +1,7 @@
 %% @author eddie
-%% @doc @todo Add description to erlang_mini_project.
+%% @doc @todo Add description to tail_erlang.
 
--module(erlang_mini_project).
+-module(tail_erlang).
 -author(eddie).
 
 %% ====================================================================
