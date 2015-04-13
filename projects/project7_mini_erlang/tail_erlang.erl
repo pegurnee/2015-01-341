@@ -9,12 +9,7 @@
 %% ====================================================================
 -export([count/2, substring/2, get_last/1, zip/2, permute/1, ackermann/2]).
 
-count(_, []) -> 0;
-count(X, [Y|YS]) -> 
-    case X =:= Y of
-        true -> 1 + count(X, YS);
-        false -> count(X, YS)
-    end.
+count(X, Y) -> count_tail(X, Y, 0).
 
 substring(X,Y) -> subHelp(0, X, Y).
 
@@ -37,6 +32,14 @@ ackermann(M, N) -> ackermann(M - 1, ackermann(M, N - 1)).
 %% ====================================================================
 %% Internal functions
 %% ====================================================================
+
+
+count_tail(_, [], Acc) -> Acc;
+count_tail(X, [Y|YS], Acc) -> 
+    case X =:= Y of
+        true -> 1 + count(X, YS, Acc);
+        false -> count(X, YS, Acc)
+    end.
 
 subHelp(_, _, []) -> -1;
 subHelp(Index, X, Y) ->
