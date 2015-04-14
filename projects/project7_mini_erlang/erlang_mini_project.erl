@@ -24,7 +24,7 @@ get_last([_, Y|Tail]) -> get_last([Y|Tail]).
 
 zip([], _) -> [];
 zip(_, []) -> [];
-zip([Head1|Tail1], [Head2|Tail2]) -> [{Head1, Head2}|zip(Tail1, Tail2)].
+zip([Head1|Tail1], [Head2|Tail2]) -> [{Head1, Head2} | zip(Tail1, Tail2)].
 
 permute([]) -> [[]];
 permute(List) -> [[Head|Tail] || Head <- List, Tail <- permute(List -- [Head])].
@@ -38,6 +38,8 @@ ackermann(M, N) -> ackermann(M - 1, ackermann(M, N - 1)).
 %% Internal functions
 %% ====================================================================
 
+%% This implementation of substring only came to fruition through discussing
+%  theory with Holice Kil. That man is a genius.
 subHelp(_, _, []) -> -1;
 subHelp(Index, X, Y) ->
     case take(Y, length(X)) of
