@@ -7,7 +7,7 @@
 %% ====================================================================
 %% API functions
 %% ====================================================================
--export(hp/0]).
+-export([hp/0,hp3/0]).
 
 hp() ->
     receive
@@ -23,35 +23,30 @@ hp() ->
     end.
             
     
-%% hp3() -> 
-%%   Other_PID = spawn(hot_potato, pass, []),
-%%   spawn(hot_potato, pass, [3, Other_PID]).
-%% 
-%% pass(0, Other_PID) ->
-%%   Other_PID ! finished,
-%%   io:format("you lose ~p~n", [self()]);
-%% pass(N, Other_PID) ->
-%%   receive
-%%       finished ->
-%%           io:format("you win ~p~n", [self()]);
-%%       {0, Other_PID} ->
-%%           io:format("you lose ~p~n", [self()]),
-%%           Other_PID ! finished;
-%%       {_, Other_PID} ->
-%%           Other_PID ! {crypto:rand_uniform(0, 8), self()};
-%%           
-%%   end,
-%%   ping(N - 1, Pong_PID).
-%% 
-%% pong() ->
-%%   receive
-%%       finished ->
-%%           io:format("pong finished~n");
-%%       {ping, Ping_PID} ->
-%%           io:format("Pong received ping~n"),
-%%           Ping_PID ! pong,
-%%           pong()
-%%   end.
+hp3() -> 
+  Other_PID = spawn(hot_potato, catch_potato, []),
+  spawn(hot_potato, throw_potato, [3, Other_PID]).
+
+throw_potato(0, Other_PID) ->
+  Other_PID ! finished,
+  io:format("you lose ~p~n", [self()]);
+throw_potato(N, Other_PID) ->
+  io:format("~p just caught ~p~n", [self(), N]),
+  receive
+      {_, Other_PID} ->
+          Other_PID ! {crypto:rand_uniform(0, 8), self()},
+          catch_potato()
+  end.
+
+
+catch_potato() ->
+  receive
+      finished ->
+          io:format("you win ~p~n", [self()]);
+      {N, Other_PID} ->
+          io:format("~p just caught ~p~n", [self(), N]),
+          throw_potato(crypto:rand_uniform(0, 8), self())
+  end.
 
 
 %% ====================================================================
